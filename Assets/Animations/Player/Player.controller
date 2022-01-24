@@ -225,7 +225,7 @@ AnimatorController:
   m_AnimatorParameters:
   - m_Name: Speed
     m_Type: 1
-    m_DefaultFloat: 0.2
+    m_DefaultFloat: 4
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
@@ -348,7 +348,7 @@ AnimatorStateMachine:
     m_Position: {x: 30, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8169499215873520531}
-    m_Position: {x: 310, y: 200, z: 0}
+    m_Position: {x: 500, y: 200, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1868814935939545213}
     m_Position: {x: 320, y: 400, z: 0}

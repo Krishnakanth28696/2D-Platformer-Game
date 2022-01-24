@@ -5,44 +5,66 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Animator animator;
+    public float speed, jump;
+    Vector3 scale, position;
+    private Rigidbody2D body;
 
-    // void Start()
-    // {
-    //     animator = GetComponent<Animator>();
-    // }
+    private void Awake()
+    {
+        body = GetComponent<Rigidbody2D>();
+    }
 
-    // Update is called once per frame
     void Update()
     {
-        float ss = Input.GetAxisRaw("Horizontal");
-        animator.SetFloat("Speed", Mathf.Abs(ss));
-        Vector3 scale = transform.localScale;
-        if (ss < 0)
-        {
-            scale.x = -1f * Mathf.Abs(scale.x);
-        }
-        else
-        {
-            scale.x = Mathf.Abs(scale.x);
-        }
-        transform.localScale = scale;
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+        bool crouch = Input.GetKey(KeyCode.LeftControl);
+        PlayerMove(horizontal);
+        PlayerJump(vertical);
+        PlayerCrouch(crouch);
 
-        if (Input.GetKey(KeyCode.LeftControl))
+
+        void PlayerCrouch (bool crouch)
         {
-            animator.SetBool("Crouch", true);
+            if (crouch)
+            {
+                animator.SetBool("Crouch", true);
+            }
+            else
+            {
+                animator.SetBool("Crouch", false);
+            }
         }
-        else
+        
+
+        void PlayerJump(float vertical)
         {
-            animator.SetBool("Crouch", false);
+            if (vertical > 0)
+            {
+                animator.SetBool("Jump", true);
+                body.AddForce(new Vector2(0, jump), ForceMode2D.Force);
+
+            }
+            else
+            {
+                animator.SetBool("Jump", false);
+            }
         }
 
-        float jj = Input.GetAxisRaw("Vertical");
-        if (jj == 1)
+
+        void PlayerMove(float horizontal)
         {
-            animator.SetBool("Jump", true);
+            //code to add player flip
+            animator.SetFloat("Speed", Mathf.Abs(horizontal));
+            scale = transform.localScale;
+            scale.x = (horizontal < 0)?  -1f * Mathf.Abs(scale.x) : Mathf.Abs(scale.x);
+            transform.localScale = scale;
+
+            //code to add player movement
+            position = transform.position;
+            position.x += horizontal * speed * Time.deltaTime;
+            transform.position = position;
         }
-        else if(jj == 0){
-            animator.SetBool("Jump", false);
-        }
+
     }
 }
