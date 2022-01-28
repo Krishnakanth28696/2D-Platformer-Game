@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,29 +6,31 @@ public class PlayerController : MonoBehaviour
     public float speed, jump;
     Vector3 scale, position;
     private Rigidbody2D body;
+    public GroundCheck groundCheck;
 
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
     }
-
     void Update()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
-        bool crouch = Input.GetKey(KeyCode.LeftControl);
+        bool crouch1 = Input.GetKeyDown(KeyCode.LeftControl);
+        bool crouch2 = Input.GetKeyUp(KeyCode.LeftControl);
         PlayerMove(horizontal);
         PlayerJump(vertical);
-        PlayerCrouch(crouch);
+        PlayerCrouch(crouch1, crouch2);
 
 
-        void PlayerCrouch (bool crouch)
+        void PlayerCrouch (bool crouch1, bool crouch2)
         {
-            if (crouch)
+            if (crouch1)
             {
                 animator.SetBool("Crouch", true);
+
             }
-            else
+            else if (crouch2)
             {
                 animator.SetBool("Crouch", false);
             }
@@ -39,11 +39,11 @@ public class PlayerController : MonoBehaviour
 
         void PlayerJump(float vertical)
         {
-            if (vertical > 0)
+            if (vertical > 0 && groundCheck.isGrounded == true)
             {
                 animator.SetBool("Jump", true);
-                body.AddForce(new Vector2(0, jump), ForceMode2D.Force);
-
+                body.velocity = new Vector2(body.velocity.x, jump);
+                //body.AddForce(new Vector2(0, jump), ForceMode2D.Force);
             }
             else
             {
