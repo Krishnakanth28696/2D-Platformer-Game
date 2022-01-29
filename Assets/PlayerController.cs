@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     Vector3 scale, position;
     private Rigidbody2D body;
     public GroundCheck groundCheck;
+    public DeathFall deathFall;
+    public LevelStart levelStart;
 
     private void Awake()
     {
@@ -21,6 +23,7 @@ public class PlayerController : MonoBehaviour
         PlayerMove(horizontal);
         PlayerJump(vertical);
         PlayerCrouch(crouch1, crouch2);
+        
 
 
         void PlayerCrouch (bool crouch1, bool crouch2)
@@ -65,6 +68,21 @@ public class PlayerController : MonoBehaviour
             position.x += horizontal * speed * Time.deltaTime;
             transform.position = position;
         }
-
     }
+    public void PlayerFall()
+    {
+        if (deathFall.isFallen == true)
+        {
+            Debug.Log(position);
+            animator.SetBool("DeathFall", true);
+            position = new Vector3(-2.12f, 50f, 0f);
+            transform.position = position;
+        }
+        else if (deathFall.isFallen == false)
+        {
+            animator.SetBool("DeathFall", false);
+        }
+        
+    }
+
 }
