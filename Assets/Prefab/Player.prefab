@@ -326,3 +326,4 @@ MonoBehaviour:
   groundCheck: {fileID: 1118273464}
   deathFall: {fileID: 0}
   levelStart: {fileID: 0}
+  scoreController: {fileID: 0}

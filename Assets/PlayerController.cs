@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public GroundCheck groundCheck;
     public DeathFall deathFall;
     public LevelStart levelStart;
+    public ScoreController scoreController;
 
     private void Awake()
     {
@@ -69,13 +70,19 @@ public class PlayerController : MonoBehaviour
             transform.position = position;
         }
     }
+
+    public void pickUp()
+    {
+        scoreController.IncreaseScore(10);
+    }
+
     public void PlayerFall()
     {
         if (deathFall.isFallen == true)
         {
             Debug.Log(position);
             animator.SetBool("DeathFall", true);
-            position = new Vector3(-2.12f, 50f, 0f);
+            position = new Vector3(-2.12f, 25f, 0f);
             transform.position = position;
         }
         else if (deathFall.isFallen == false)

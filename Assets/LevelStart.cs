@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelStart : MonoBehaviour
@@ -10,7 +8,7 @@ public class LevelStart : MonoBehaviour
     {
         if (collision.gameObject.GetComponent<PlayerController>() != null)
         {
-            Debug.Log("Level Is Started");
+            //Debug.Log("Level Is Started");
             deathFall.isFallen = false;
             controller.PlayerFall();
         }
