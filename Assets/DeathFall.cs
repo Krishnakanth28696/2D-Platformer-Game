@@ -10,7 +10,7 @@ public class DeathFall : MonoBehaviour
         {
             Debug.Log("Player has fallen and going to its starting position");
             isFallen = true;
-            controller.PlayerFall();
+            controller.PlayerResurrect();
         }
     }
 }

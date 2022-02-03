@@ -4,7 +4,7 @@ using TMPro;
 public class ScoreController : MonoBehaviour
 {
     private TextMeshProUGUI ScoreText;
-    private int score = 0;
+    public int score = 0;
 
     private void Awake()
     {
@@ -22,9 +22,9 @@ public class ScoreController : MonoBehaviour
         RefreshUI();
     }
 
-    private void RefreshUI()
+    public void RefreshUI()
     {
         string text = "Score: " + score;
-        ScoreText.text = (score < 30) ?  text : text + "\nAll 3 Keys are collected !! \n LEVEL COMPLETED";
+        ScoreText.text = (score < 30) ?  text : text + "\n \nAll 3 Keys are collected !!";
     }
 }

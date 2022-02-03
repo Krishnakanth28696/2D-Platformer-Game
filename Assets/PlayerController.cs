@@ -2,14 +2,20 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    // Other scripts
+    public GroundCheck groundCheck;
+    public DeathFall deathFall;
+    public EnemyController enemyController;
+    public LevelStart levelStart;
+    public ScoreController scoreController;
+    public HealthController healthController;
+
+    // Local
     public Animator animator;
     public float speed, jump;
     Vector3 scale, position;
     private Rigidbody2D body;
-    public GroundCheck groundCheck;
-    public DeathFall deathFall;
-    public LevelStart levelStart;
-    public ScoreController scoreController;
+    
 
     private void Awake()
     {
@@ -71,25 +77,31 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void PlayerResurrect()
+    {
+        if (deathFall.isFallen == true || enemyController.isAttacked == true)
+        {
+            Debug.Log(position);
+            animator.SetBool("DeathFall", true);
+            position = new Vector3(-2.12f, 10f, 0f);
+            transform.position = position;
+            DecreaseHealth();
+        }
+        else if (deathFall.isFallen == false || enemyController.isAttacked == false)
+        {
+            animator.SetBool("DeathFall", false);
+        }
+        
+    }
+
     public void pickUp()
     {
         scoreController.IncreaseScore(10);
     }
 
-    public void PlayerFall()
+    public void DecreaseHealth()
     {
-        if (deathFall.isFallen == true)
-        {
-            Debug.Log(position);
-            animator.SetBool("DeathFall", true);
-            position = new Vector3(-2.12f, 25f, 0f);
-            transform.position = position;
-        }
-        else if (deathFall.isFallen == false)
-        {
-            animator.SetBool("DeathFall", false);
-        }
-        
+        healthController.DecreaseHeart(1);
     }
 
 }
