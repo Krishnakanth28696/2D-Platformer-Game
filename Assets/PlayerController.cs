@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public float speed, jump;
     Vector3 scale, position;
     private Rigidbody2D body;
+    public bool enemyIsAttack;
     
 
     private void Awake()
@@ -77,15 +78,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void enemyAttack()
+    {
+        enemyIsAttack = true;
+    }
     public void PlayerResurrect()
     {
-        if (deathFall.isFallen == true || enemyController.isAttacked == true)
+        if (deathFall.isFallen == true || enemyIsAttack == true)
         {
             Debug.Log(position);
             animator.SetBool("DeathFall", true);
             position = new Vector3(-2.12f, 10f, 0f);
             transform.position = position;
             DecreaseHealth();
+            enemyIsAttack = false;
         }
         else if (deathFall.isFallen == false || enemyController.isAttacked == false)
         {

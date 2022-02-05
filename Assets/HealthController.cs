@@ -12,7 +12,7 @@ public class HealthController : MonoBehaviour
 
     private void Update()
     {
-        if(numOfHearts > 1)
+        if(numOfHearts >= 0)
         {
             if (numOfHearts < 1)
             {
@@ -30,6 +30,7 @@ public class HealthController : MonoBehaviour
     }
     public void DecreaseHeart(int decrease)
     {
+        Debug.Log("Decreasing the heart of player by 1");
         numOfHearts -= decrease;
         if(numOfHearts < 1)
         {

@@ -58,7 +58,8 @@ public class EnemyController : MonoBehaviour
         {
             Debug.Log("Player has fallen and going to its starting position");
             isAttacked = true;
-            controller.DecreaseHealth();
+            //controller.DecreaseHealth();
+            controller.enemyAttack();
             controller.PlayerResurrect();
         }
     }
