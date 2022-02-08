@@ -34,7 +34,7 @@ public class HealthController : MonoBehaviour
         numOfHearts -= decrease;
         if(numOfHearts < 1)
         {
-            sceneController.deadSceneLoad();
+            sceneController.deadPanelLoad();
         }
     }
 

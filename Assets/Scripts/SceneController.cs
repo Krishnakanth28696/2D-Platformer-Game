@@ -7,6 +7,7 @@ public class SceneController : MonoBehaviour
 {
     public Button buttonPause, buttonRestart, buttonCancel;
     public GameObject optionsPanel;
+    public GameObject deadPanel;
     private void Awake()
     {
         buttonRestart.onClick.AddListener(Level1SceneLoad);
@@ -25,11 +26,11 @@ public class SceneController : MonoBehaviour
     }
     private void Level1SceneLoad()
     {
-        SceneManager.LoadScene("Showcase");
+        SceneManager.LoadScene("One");
     }
-    public void deadSceneLoad()
+    public void deadPanelLoad()
     {
-        SceneManager.LoadScene("Dead");
+        deadPanel.SetActive(true);
     }
 
     public void Level2SceneLoad()

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class LobbySceneController : MonoBehaviour
 {
     public Button buttonStartAdventure;
+    public GameObject showLevel;
     private void Awake()
     {
         buttonStartAdventure.onClick.AddListener(Level1SceneLoad);
@@ -12,6 +13,6 @@ public class LobbySceneController : MonoBehaviour
 
     private void Level1SceneLoad()
     {
-        SceneManager.LoadScene("Showcase");
+        showLevel.SetActive(true);
     }
 }

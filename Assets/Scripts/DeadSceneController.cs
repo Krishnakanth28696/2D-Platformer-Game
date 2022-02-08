@@ -6,11 +6,12 @@ public class DeadSceneController : MonoBehaviour
     public Button buttonPlayAgain;
     private void Awake()
     {
-        buttonPlayAgain.onClick.AddListener(Level1SceneLoad);
+        buttonPlayAgain.onClick.AddListener(ReLoadScene);
     }
 
-    private void Level1SceneLoad()
+    private void ReLoadScene()
     {
-        SceneManager.LoadScene("Showcase");
+        Scene scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.buildIndex);
     }
 }
